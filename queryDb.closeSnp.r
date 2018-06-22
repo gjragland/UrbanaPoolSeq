@@ -36,7 +36,7 @@ limit 1;",sep="")
     
     library(RMySQL)
     
-    mydb = dbConnect(MySQL(), user='raglandlab', password='pomonella', dbname=db)
+    mydb = dbConnect(MySQL(), user='raglandlab', password=pw, dbname=db)
     j=1
     for (i in 1:length(scafs)) {
         query<-formQuery(c(scafs[i],pos[i]))
