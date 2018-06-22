@@ -7,7 +7,7 @@
 #SBATCH --output permCor1.out
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
-#SBATCH --mail-user=gregory.ragland@ucdenver.edu
+#SBATCH --mail-user=<email>
 #SBATCH -A ucb-summit-gjr #allocation
 #SBATCH --qos condo #allocation
 #SBATCH --workdir=/scratch/summit/grra3428/poolseq 
