@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --nodes=1 #nodes
+#SBATCH --ntasks=24 #number of cores 
+#SBATCH --ntasks-per-node=24 #cores per node
+#SBATCH --time=03-00:00:00 #days - hours- min - sec. 
+#SBATCH --job-name permCor1
+#SBATCH --output permCor1.out
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-user=gregory.ragland@ucdenver.edu
+#SBATCH -A ucb-summit-gjr #allocation
+#SBATCH --qos condo #allocation
+#SBATCH --workdir=/scratch/summit/grra3428/poolseq 
+
+####SBATCH -partition=smem  puts you on the high memory node.
+
+cd /scratch/summit/grra3428/poolseq
+module load R/3.5.0
+R CMD BATCH permCor1.r
+
+
