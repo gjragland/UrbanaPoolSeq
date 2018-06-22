@@ -3,7 +3,7 @@
 #specifically queries 'RAD_linkage_matchPool' to find closest markers with linkage/chromosome information to a vector of scaffolds and positions
 
 ############## START ##################
-queryDb.closeSnp<-function(scafs,pos,db='PomUrbanaGrant',Table='RAD_linkage_matchPool') {
+queryDb.closeSnp<-function(scafs,pos,db='PomUrbanaGrant',Table='RAD_linkage_matchPool',pw) {
 
     if ( length(scafs) != length(pos) ) {stop("lengths of scaffold and position vectors much match\n")}
 
