@@ -4,12 +4,12 @@
 #query string should be interpretable by sprintf to add 'id' as a character variable
 
 ############## START ##################
-queryDb<-function(ids,queryString,db='PomUrbanaGrant') {
+queryDb<-function(ids,queryString,db='PomUrbanaGrant',pw) {
 
 
 library(RMySQL)
 
-mydb = dbConnect(MySQL(), user='raglandlab', password='pomonella', dbname=db)
+mydb = dbConnect(MySQL(), user='raglandlab', password=pw, dbname=db)
 
 j=1;
 for (id in ids) {
