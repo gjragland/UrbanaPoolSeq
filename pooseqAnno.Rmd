@@ -1,0 +1,62 @@
+---
+title: "Analysis of Urbana R. pomonella Poolseq data"
+output:
+  pdf_document:
+    highlight: zenburn
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+editor_options:
+  chunk_output_type: console
+always_allow_html: yes
+---
+
+# Inital data manipulation
+
+Data are imported from a flat file generated from the sql database, with some manipulation for filtering and format corrections.
+
+```{r initial data manipulation, results="hide", eval=FALSE}
+
+#import, deterimine which rows are indels, and creates 2 new data sets, snps and indels
+setwd('/media/raglandlab/ExtraDrive4/Urbana_PoolSeq')
+data<-read.table('poolseqSnpsUrbana.txt',stringsAsFactors=F,row.names=NULL,header=T)
+gt1<-function(x) {
+    out<-F
+    if (nchar(x) > 1) {out<-T}
+    return(out)
+}
+isIndel<-sapply(data$ref,gt1) | sapply(data$alt,gt1)
+snps<-data[!isIndel,]
+indels<-data[isIndel,]
+rm(data)
+gc()
+
+#fix problem with character columns
+a<-apply(snps[,6:23],2,as.numeric)
+snps[,6:23]<-a
+rm(a)
+gc()
+
+#filter to min 10x per pop coverage
+ind<-rowSums(snps[,6:7]) >= 10 & rowSums(snps[,8:9]) >= 10 
+snps<-snps[ind,]
+
+#estimate fdr for snps
+snps$fdrHost<-p.adjust(snps$urbana_appleave_hawave_fisher_pvalue,method='BH')
+snps$fdrEclApple<-p.adjust(snps$urbana_appleearly_applelate_fisher_pvalue,method='BH')
+snps$fdrEclHaw<-p.adjust(snps$urbana_hawearly_hawlate_fisher_pvalue,method='BH')
+
+
+```
+
+6/26/2018
+Added a LR test based on a lynch paper, accounts for dual sampling of alleles. Import those data:
+
+```{r import lr tests, results="hide", eval=FALSE}
+
+snps=
+
+
+```
+
+I
